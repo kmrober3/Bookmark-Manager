@@ -1,29 +1,32 @@
 class bookmarkManager { 
 
     constructor() {
-        this.urls = [];
         this.lS = localStorage;
     }
 
     addItem(input) { 
         let listContent = document.getElementById("urlContent");
-        listContent.innerHTML = ""; 
-        this.urls.push(input);    
+        listContent.innerHTML = "";      
+        this.lS.setItem(input, input);
+        for (let i = 0; i < this.lS.length; i++) {    
+            let path = document.createElement("a"); 
+            let value = document.createElement("li");  
 
-        for (let i = 0; i < this.urls.length; i++) { 
-            let value = document.createElement("li");
-            value.textContent = this.urls[i];    
-            console.log("HI");
-            this.lS.setItem(this.urls[i], this.urls[i]);
-            value.id = this.urls[i];  
+            path.href = this.lS.key(i);
+            path.textContent = this.lS.key(i); 
+            path.target = "_blank"; // Fix for links, dont know why
+
+            value.id = this.lS.key(i);  
+            value.appendChild(path); 
+
             listContent.append(value);
-
         }
     }  
 
     loadItems() {
         let listContent = document.getElementById("urlContent");
         listContent.innerHTML = ""; 
+        console.log(this.lS);
         for (let i = 0; i < this.lS.length; i++) { 
             let value = document.createElement("li");
             value.textContent = this.lS.key(i);
@@ -46,7 +49,7 @@ document.getElementById("add").addEventListener("click", (event) => {
     instance.addItem(value); 
 }); 
 
-document.addEventListener("DOMContentLoaded", (event) => {
+document.addEventListener("DOMContentLoaded", (event) => { 
     instance.loadItems();
 })
 
