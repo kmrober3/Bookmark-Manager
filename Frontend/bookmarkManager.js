@@ -8,26 +8,28 @@ class bookmarkManager {
     addItem(input) { 
         let listContent = document.getElementById("urlContent");
         listContent.innerHTML = ""; 
-        this.urls.push(input);  
+        this.urls.push(input);    
 
-        this.urls.forEach(url => {
+        for (let i = 0; i < this.urls.length; i++) { 
             let value = document.createElement("li");
-            value.textContent = url;   
-            this.lS.setItem(url, url);
-            value.id = url;  
-            listContent.append(value); 
-        })
+            value.textContent = this.urls[i];    
+            console.log("HI");
+            this.lS.setItem(this.urls[i], this.urls[i]);
+            value.id = this.urls[i];  
+            listContent.append(value);
+
+        }
     }  
 
     loadItems() {
         let listContent = document.getElementById("urlContent");
-        listContent.innerHTML = "";
-        this.lS.forEach(k => {
+        listContent.innerHTML = ""; 
+        for (let i = 0; i < this.lS.length; i++) { 
             let value = document.createElement("li");
-            value.textContent = k;
-            value.id = k;
-            listContent.append();
-        });
+            value.textContent = this.lS.key(i);
+            value.id = this.lS.key(i);
+            listContent.append(value);
+        }
     }
 
     clearLS() {
