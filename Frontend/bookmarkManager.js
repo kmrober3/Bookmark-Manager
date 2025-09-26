@@ -13,7 +13,7 @@ class bookmarkManager {
             let value = document.createElement("li");  
             let box = document.createElement("input");
             box.type = "checkbox"; 
-            box.id = this.lS.key(i);
+            box.id = this.lS.key(i); 
 
             path.href = this.lS.key(i);
             path.textContent = this.lS.key(i); 
@@ -36,7 +36,8 @@ class bookmarkManager {
             let value = document.createElement("li");  
             let box = document.createElement("input");
             box.type = "checkbox"; 
-            box.id = this.lS.key(i);  
+            box.id = this.lS.key(i);   
+            console.log(box.id);
             path.appendChild(box); 
 
             path.href = this.lS.key(i);
@@ -58,16 +59,18 @@ class bookmarkManager {
         body.innerHTML = ""; 
         let arr = [];
         for (let i = 0; i < this.lS.length; i++) {
-            arr.push(this.lS.key(i));
+            arr.push(this.lS.getItem(this.lS.key(i)));
         } 
         console.log(arr);
-        for (let i = 0; i < arr.length; i++) { 
+        for (let i = 0; i < arr.length; i++) {  
+            console.log("HI");
             let boxVal = document.getElementById(arr[i]);
-            if (boxVal && boxVal.checked) { 
+            if (boxVal && boxVal.checked) {  
+                console.log("Please work");
                 this.lS.removeItem(arr[i]);
             }
         }  
-        console.log("deleteItems" + this.lS);
+        //console.log("deleteItems" + this.lS);
         this.addItem();
     }
 
@@ -85,15 +88,14 @@ document.getElementById("add").addEventListener("click", (event) => {
     instance.addItem(value); 
 }); 
 
-document.addEventListener("DOMContentLoaded", (event) => { 
+/*document.addEventListener("DOMContentLoaded", (event) => { 
     instance.loadItems();
-})
+});*/
 
 document.getElementById("remove").addEventListener("click", (event) => {
-    this.deleteItems();
+    instance.deleteItems();
 });
 
-/*document.addEventListener("DOMContentLoaded", (event) => {
+document.addEventListener("DOMContentLoaded", (event) => {
     instance.clearLS();
-})*/
-
+});
