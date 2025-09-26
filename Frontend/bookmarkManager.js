@@ -1,7 +1,7 @@
 class bookmarkManager { 
 
     constructor() {
-        this.lS = localStorage;
+        this.lS = localStorage; 
     }
 
     addItem(input) { 
@@ -27,10 +27,17 @@ class bookmarkManager {
         let listContent = document.getElementById("urlContent");
         listContent.innerHTML = ""; 
         console.log(this.lS);
-        for (let i = 0; i < this.lS.length; i++) { 
-            let value = document.createElement("li");
-            value.textContent = this.lS.key(i);
-            value.id = this.lS.key(i);
+        for (let i = 0; i < this.lS.length; i++) {  
+            let path = document.createElement("a"); 
+            let value = document.createElement("li"); 
+
+            path.href = this.lS.key(i);
+            path.textContent = this.lS.key(i); 
+            path.target = "_blank"; 
+
+            value.id = this.lS.key(i); 
+            value.appendChild(path); 
+
             listContent.append(value);
         }
     }
