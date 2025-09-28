@@ -74,7 +74,7 @@ class bookmarkManager {
             }
         }   
         //console.log("deleteItems" + this.lS);   
-        
+
         body.innerHTML = ""; 
         for (let i = 0; i < this.lS.length; i++) {     
             //Creating of html elements 
@@ -95,8 +95,8 @@ class bookmarkManager {
 
             value.append(path); 
 
-            listContent.append(value); 
-            listContent.append(box); 
+            body.append(value); 
+            body.append(box); 
         }
 
     }
