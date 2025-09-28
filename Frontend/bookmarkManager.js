@@ -7,19 +7,24 @@ class bookmarkManager {
     addItem(input) { 
         let listContent = document.getElementById("urlContent");
         listContent.innerHTML = "";      
-        this.lS.setItem(input, input);
-        for (let i = 0; i < this.lS.length; i++) {    
-            let path = document.createElement("a"); 
-            let value = document.createElement("li");  
-            let box = document.createElement("input");
-            box.type = "checkbox"; 
-            box.id = this.lS.key(i); 
+        this.lS.setItem(encodeURIComponent(input), input);
+        for (let i = 0; i < this.lS.length; i++) {     
+            //Creating of html elements 
+            let value = document.createElement("li");
+            let path = document.createElement("a");   
+            let box = document.createElement("input"); 
 
-            path.href = this.lS.key(i);
-            path.textContent = this.lS.key(i); 
+            // Styling to checkbox element
+            box.type = "checkbox"; 
+            box.id = this.lS.key(i);   
+
+            console.log(box.id);
+
+            //Adding hyperlink to webpage
+            path.href = this.lS.getItem(this.lS.key(i));
+            path.textContent = this.lS.getItem(this.lS.key(i)); 
             path.target = "_blank"; // Fix for links, dont know why
 
-            //value.id = this.lS.key(i);  
             value.append(path); 
 
             listContent.append(value); 
@@ -30,33 +35,30 @@ class bookmarkManager {
     loadItems() {
         let listContent = document.getElementById("urlContent");
         listContent.innerHTML = ""; 
-        console.log(this.lS);
-        for (let i = 0; i < this.lS.length; i++) {  
+        for (let i = 0; i < this.lS.length; i++) {   
+            //Creating of html elements 
             let path = document.createElement("a"); 
             let value = document.createElement("li");  
-            let box = document.createElement("input");
+            let box = document.createElement("input");  
+
+            // Styling to checkbox element
             box.type = "checkbox"; 
             box.id = this.lS.key(i);   
-            console.log(box.id);
-            path.appendChild(box); 
 
-            path.href = this.lS.key(i);
-            path.textContent = this.lS.key(i); 
-            path.target = "_blank"; 
+            //Adding hyperlink to webpage
+            path.href = this.lS.getItem(this.lS.key(i));
+            path.textContent = this.lS.getItem(this.lS.key(i)); 
+            path.target = "_blank";  
 
-            //value.id = this.lS.key(i); 
             value.append(path); 
 
             listContent.append(value); 
             listContent.append(box);  
-
-            //console.log(path);
         }
     } 
 
     deleteItems() {   
         let body = document.getElementById("urlContent");
-        body.innerHTML = ""; 
         let arr = [];
         for (let i = 0; i < this.lS.length; i++) {
             arr.push(this.lS.getItem(this.lS.key(i)));
@@ -64,14 +66,39 @@ class bookmarkManager {
         console.log(arr);
         for (let i = 0; i < arr.length; i++) {  
             console.log("HI");
-            let boxVal = document.getElementById(arr[i]);
+            let boxVal = document.getElementById(encodeURIComponent(arr[i])); 
+            console.log(boxVal);
             if (boxVal && boxVal.checked) {  
                 console.log("Please work");
-                this.lS.removeItem(arr[i]);
+                this.lS.removeItem(encodeURIComponent(arr[i]));
             }
-        }  
-        //console.log("deleteItems" + this.lS);
-        this.addItem();
+        }   
+        //console.log("deleteItems" + this.lS);   
+        
+        body.innerHTML = ""; 
+        for (let i = 0; i < this.lS.length; i++) {     
+            //Creating of html elements 
+            let value = document.createElement("li");
+            let path = document.createElement("a");   
+            let box = document.createElement("input"); 
+
+            // Styling to checkbox element
+            box.type = "checkbox"; 
+            box.id = this.lS.key(i);   
+
+            console.log(box.id);
+
+            //Adding hyperlink to webpage
+            path.href = this.lS.getItem(this.lS.key(i));
+            path.textContent = this.lS.getItem(this.lS.key(i)); 
+            path.target = "_blank"; // Fix for links, dont know why
+
+            value.append(path); 
+
+            listContent.append(value); 
+            listContent.append(box); 
+        }
+
     }
 
     clearLS() {
@@ -88,14 +115,15 @@ document.getElementById("add").addEventListener("click", (event) => {
     instance.addItem(value); 
 }); 
 
-/*document.addEventListener("DOMContentLoaded", (event) => { 
+document.addEventListener("DOMContentLoaded", (event) => { 
     instance.loadItems();
-});*/
+});
 
 document.getElementById("remove").addEventListener("click", (event) => {
     instance.deleteItems();
-});
+}); 
 
-document.addEventListener("DOMContentLoaded", (event) => {
+// Clears local storage
+/*document.addEventListener("DOMContentLoaded", (event) => {
     instance.clearLS();
-});
+});*/
