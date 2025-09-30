@@ -115,7 +115,9 @@ document.getElementById("add").addEventListener("click", (event) => {
     instance.addItem(value); 
 }); 
 
-document.addEventListener("DOMContentLoaded", (event) => { 
+document.addEventListener("DOMContentLoaded", (event) => {   
+    console.log("HI");
+    console.log(instance);
     instance.loadItems();
 });
 
