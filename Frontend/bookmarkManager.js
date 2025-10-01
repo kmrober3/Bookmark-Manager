@@ -31,10 +31,10 @@ class bookmarkManager {
             path.href = decodeURIComponent(this.lS.key(i));
             path.textContent = this.lS.getItem(this.lS.key(i)) + " " + decodeURIComponent(this.lS.key(i))
 
-            value.append(path); 
+            value.append(path);  
+            value.append(box);
 
             listContent.append(value); 
-            listContent.append(box); 
         }
     }  
 
@@ -56,10 +56,10 @@ class bookmarkManager {
             path.textContent = this.lS.getItem(this.lS.key(i)) + " " + decodeURIComponent(this.lS.key(i)); 
             path.target = "_blank";  
 
-            value.append(path); 
+            value.append(path);  
+            value.append(box);
 
-            listContent.append(value); 
-            listContent.append(box);  
+            listContent.append(value);  
         }
     } 
 
@@ -99,10 +99,10 @@ class bookmarkManager {
             path.textContent = this.lS.getItem(this.lS.key(i)) + " " + decodeURIComponent(this.lS.key(i)); 
             path.target = "_blank"; // Fix for links, dont know why
 
-            value.append(path); 
+            value.append(path);  
+            value.append(box);
 
             body.append(value); 
-            body.append(box); 
         }
 
     }
