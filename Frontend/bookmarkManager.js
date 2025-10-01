@@ -117,7 +117,6 @@ let instance = new bookmarkManager();
 
 document.getElementById("add").addEventListener("click", (event) => { 
     let value = document.getElementById("userInput").value; 
-    console.log(value);
     instance.addItem(value); 
 }); 
 
